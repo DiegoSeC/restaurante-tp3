@@ -84,7 +84,9 @@ class Handler extends ExceptionHandler
         }
 
 
-        return response()->json(['error' => $exception->getMessage(), 'detail' => null], $exception->getCode());
+        $code = ($exception->getCode() == 0)? 500 : $exception->getCode();
+
+        return response()->json(['error' => $exception->getMessage(), 'detail' => null], $code);
     }
 
     /**
